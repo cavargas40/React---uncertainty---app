@@ -3,7 +3,7 @@ console.log("app.js is running");
 const app = {
   title: "Uncertain App",
   subtitle: "Put your life in the hands of a laptop",
-  options: ["One", "Two"],
+  options: [],
 };
 
 const onFormSubmit = (e) => {
@@ -23,6 +23,12 @@ const onRemoveAll = () => {
   render();
 };
 
+const onMakeDecision = () => {
+    const randomNum = Math.floor(Math.random() * app.options.length);    
+    const option = app.options[randomNum];
+    alert(option);
+}
+
 const appRoot = document.getElementById("app");
 
 // https://reactjs.org/docs/events.html
@@ -38,10 +44,11 @@ const render = () => {
           ? "Here are your options"
           : "No options"}
       </p>
+      <button disabled={!app.options.length} onClick={onMakeDecision}>What should I do?</button>
       <button onClick={onRemoveAll}>Remove All</button>
       <ol>
-        {app.options.map((option) => (
-          <li key={option}>{option}</li>
+        {app.options.map((option, i) => (
+          <li key={option+i}>{option}</li>
         ))}
       </ol>
 

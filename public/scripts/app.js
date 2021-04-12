@@ -5,7 +5,7 @@ console.log("app.js is running");
 var app = {
   title: "Uncertain App",
   subtitle: "Put your life in the hands of a laptop",
-  options: ["One", "Two"]
+  options: []
 };
 
 var onFormSubmit = function onFormSubmit(e) {
@@ -23,6 +23,12 @@ var onFormSubmit = function onFormSubmit(e) {
 var onRemoveAll = function onRemoveAll() {
   app.options = [];
   render();
+};
+
+var onMakeDecision = function onMakeDecision() {
+  var randomNum = Math.floor(Math.random() * app.options.length);
+  var option = app.options[randomNum];
+  alert(option);
 };
 
 var appRoot = document.getElementById("app");
@@ -51,16 +57,21 @@ var render = function render() {
     ),
     React.createElement(
       "button",
+      { disabled: !app.options.length, onClick: onMakeDecision },
+      "What should I do?"
+    ),
+    React.createElement(
+      "button",
       { onClick: onRemoveAll },
       "Remove All"
     ),
     React.createElement(
       "ol",
       null,
-      app.options.map(function (option) {
+      app.options.map(function (option, i) {
         return React.createElement(
           "li",
-          { key: option },
+          { key: option + i },
           option
         );
       })
