@@ -19,9 +19,9 @@ const onFormSubmit = (e) => {
 };
 
 const onRemoveAll = () => {
-    app.options = [];
-    render();
-}
+  app.options = [];
+  render();
+};
 
 const appRoot = document.getElementById("app");
 
@@ -40,9 +40,11 @@ const render = () => {
       </p>
       <button onClick={onRemoveAll}>Remove All</button>
       <ol>
-        <li>Item one</li>
-        <li>Item two</li>
+        {app.options.map((option) => (
+          <li key={option}>{option}</li>
+        ))}
       </ol>
+
       <form onSubmit={onFormSubmit}>
         <input type="text" name="option" />
         <button>Add Option</button>
