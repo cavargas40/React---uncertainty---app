@@ -3,13 +3,19 @@ console.log("app.js is running");
 const app = {
   title: "Uncertain App",
   subtitle: "Put your life in the hands of a laptop",
+  options: ["One", "Two"],
 };
 
 // JSX - JavaScript XML
 const template = (
   <div>
     <h1>{app.title}</h1>
-    <p>{app.subtitle}</p>
+    {app.subtitle && <p>{app.subtitle}</p>}
+    <p>
+      {app.options && app.options.length > 0
+        ? "Here are your options"
+        : "No options"}
+    </p>
     <ol>
       <li>Item one</li>
       <li>Item two</li>
@@ -17,24 +23,23 @@ const template = (
   </div>
 );
 
-// Create a template Two var JSX expression
-// div
-//  h1 -> Carlos Vargas
-//  p  -> age: 29
-//  p  -> location: Bogota
-//  Render templateTwo instead of people
-
 const user = {
   name: "Carlos",
   age: 29,
-  location: "BogotaF",
+  location: "Bogota",
+};
+
+const getLocation = (location) => {
+  if (location) {
+    return <p>Location: {location}</p>;
+  }
 };
 
 const templateTwo = (
   <div>
-    <h1>{user.name}</h1>
-    <p>Age: {user.age}</p>
-    <p>Location: {user.location}</p>
+    <h1>{user.name ? user.name : "Anonymous"}</h1>
+    {user.age && user.age >= 18 && <p>Age: {user.age}</p>}
+    {getLocation(user.location)}
   </div>
 );
 
